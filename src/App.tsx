@@ -1,9 +1,13 @@
-import { Home } from './pages/Home';
+import { Header } from './components/Header';
+import { PokemonList } from './components/PokemonList';
+import { GlobalStyle } from './styles/global';
 
 function App() {
   return (
     <>
-      <Home/>
+      <Header/>
+      <PokemonList/>
+      <GlobalStyle/>
     </>
   );
 }
