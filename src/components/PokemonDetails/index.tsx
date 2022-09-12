@@ -1,5 +1,4 @@
-import { Url } from "url";
-import { Content } from "./style";
+import { Card, Content, Types } from "./style"
 
 type PokemonDetailsProps = {
   pokemon: {
@@ -22,17 +21,18 @@ type PokemonDetailsProps = {
   }
 } 
 
-
-
 export function PokemonDetails(props: PokemonDetailsProps) {
   return (
-    <Content >
-      <img src={props.pokemon.sprites.other["official-artwork"].front_default} alt={props.pokemon.name} />
-      <p>{props.pokemon.name}</p> 
-      <p>{props.pokemon.id}</p>
-      <p>{props.pokemon.height}</p>  
-      <p>{props.pokemon.weight}</p> 
-      <p>{props.pokemon.types[0].type.name}</p> 
-    </Content>
+    <Card >
+      <Content>
+        <img src={props.pokemon.sprites.other["official-artwork"].front_default} alt={props.pokemon.name} />
+          <h3>Nº {props.pokemon.id}</h3>
+          <h2>{props.pokemon.name}</h2> 
+        <Types>
+          <p>{props.pokemon.types[0].type.name}</p>
+          <p>{props.pokemon.types[1].type.name}</p>
+        </Types>
+      </Content>
+    </Card>
   )
 }

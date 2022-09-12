@@ -7,7 +7,7 @@ export function Header() {
     <Container>
       <h1>Poke<span>DB</span></h1>
       <form>
-        <input type="text" />
+        <input type="submit" />
         <img src={searchImg} alt="Search" />
       </form>
     </Container>
