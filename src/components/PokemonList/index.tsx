@@ -1,7 +1,6 @@
-import { FormEvent, useEffect, useState } from "react";
-import api_individual from "../../services/apiIndividuals";
-import { PokemonDetails } from "../PokemonDetails";
-import { Content } from "./style";
+import { FormEvent, useState } from "react";
+import { Container } from "../Header/style";
+import { Card, Content, Types } from "./style";
 
 
 type Pokemon = {
@@ -27,32 +26,53 @@ type Pokemon = {
 export function PokemonList() {
   const [pokemon, setPokemon] = useState<Pokemon[]>([])
   const [pokemonName, setPokemonName] = useState('')
-
   
   function handleGetPokemon(event: FormEvent) {
     event.preventDefault()
-    console.log(pokemonName)
+    fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`)
+      .then((response) => response.json())
+      .then((data) => setPokemon([data]));
   }
-
-  useEffect(() => {
-    fetch(`https://pokeapi.co/api/v2/pokemon/212`)
-      .then(response => response.json())
-      .then(data => setPokemon([data]))
-  }, [pokemonName])
   
   return (
-    <Content>
-    <div>
-      <form onSubmit={handleGetPokemon}>
-        <input 
-        type="text" 
-        onChange={event => setPokemonName(event.target.value.toLowerCase())}
-        />
-      </form>
-      {pokemon.map(data => { 
-        return <PokemonDetails key={data.id} pokemon={data}/>
-      })}
-    </div>
-    </Content>
+    <Container>
+      <div>
+        <form onSubmit={handleGetPokemon}>
+          <input 
+          type="text"
+          onChange={event => setPokemonName(event.target.value.toLowerCase())}
+          />
+        </form>
+        {pokemon.map(data => { 
+          if (data.types.length == 1) {
+            return (
+              <Card>
+              <Content>
+                <img src={data.sprites.other["official-artwork"].front_default} alt={data.name} />
+                <h3>Nº {data.id}</h3>
+                <h2>{data.name}</h2>
+                <Types>
+                  <p>{data.types[0].type.name}</p>
+                </Types>
+              </Content>
+              </Card>
+            )
+          } else if (data.types.length == 2) {
+            return (
+            <Card>
+            <Content>
+              <img src={data.sprites.other["official-artwork"].front_default} alt={data.name} />
+              <h3>Nº {data.id}</h3>
+              <h2>{data.name}</h2>
+              <Types>
+                <p>{data.types[0].type.name}</p>
+                <p>{data.types[1].type.name}</p>
+              </Types>
+            </Content>
+            </Card>
+            )}
+        })}
+      </div>
+    </Container>
   )
 }

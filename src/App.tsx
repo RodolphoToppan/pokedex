@@ -1,14 +1,13 @@
-import { Header } from './components/Header';
-import { PokemonList } from './components/PokemonList';
-import { GlobalStyle } from './styles/global';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Home } from './pages/Home';
 
 function App() {
   return (
-    <>
-      <Header/>
-      <PokemonList/>
-      <GlobalStyle/>
-    </>
+    <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+        </Routes>
+    </BrowserRouter>
   );
 }
 
