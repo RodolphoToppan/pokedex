@@ -17,26 +17,14 @@ h1 {
     color: var(--details);
   }
 }
+`
 
-form {
-  display: flex;
-  align-items: center;
+export const Social = styled.div`
+display: flex;
+gap: 1rem;
 
-  input {
-    height: 3.2rem;
-    font-size: 2.4rem;
-
-    background: rgba(196, 196, 196, 0.3);
-    color: var(--white);
-    border: none;
-    border-radius: 0.3rem;
-  }
-  
-  img {
-    font-size: 2.4rem;
-    width: 2rem;
-    height: 2rem;
-    margin-left: -3rem;
-  }
+img {
+  width: 3.5rem;
 }
+
 `
